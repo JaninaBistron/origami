@@ -47,6 +47,14 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+/* VR world
+* Using sockit.IO for receiving data from VR App
+*/
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+//const config: SocketIoConfig = { url: 'http://192.168.0.242:3001', options: {} }; // local
+const config: SocketIoConfig = { url: 'https://vr-app-multi-users.herokuapp.com/', options: {} }; // multi users at once
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
